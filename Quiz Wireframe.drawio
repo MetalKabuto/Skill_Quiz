@@ -1,0 +1,181 @@
+<mxfile host="app.diagrams.net" modified="2024-01-17T13:06:26.971Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:121.0) Gecko/20100101 Firefox/121.0" etag="WruzfE4acFkAY98nTXAy" version="22.1.20" type="device">
+  <diagram name="Sida-1" id="Bt5n4-rPI88u2TnNnoHw">
+    <mxGraphModel dx="1434" dy="774" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="340" y="600" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-2" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="40" y="600" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-3" value="" style="whiteSpace=wrap;html=1;aspect=fixed;" parent="1" vertex="1">
+          <mxGeometry x="325" y="310" width="250" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-4" value="" style="whiteSpace=wrap;html=1;aspect=fixed;fillColor=#5C5C5C;" parent="1" vertex="1">
+          <mxGeometry x="640" y="320" width="220" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-5" value="Huvudmenyn" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="340" y="570" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-6" value="Inställningar" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="570" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-7" value="Hjälp" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="630" y="290" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-8" value="Spelfönstret" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="320" y="280" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-9" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-10" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-11" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-12" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-13" value="-&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;  10&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;+&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="740" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-14" value="Tillbaka" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="115" y="780" width="60" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-15" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="760" as="sourcePoint" />
+            <mxPoint x="170" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-16" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="760" as="sourcePoint" />
+            <mxPoint x="120" y="740" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-17" value="-&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;  10&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;+&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="630" width="90" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-18" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="170" y="650" as="sourcePoint" />
+            <mxPoint x="170" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-19" value="" style="endArrow=none;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="120" y="650" as="sourcePoint" />
+            <mxPoint x="120" y="630" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-20" value="Antal frågor" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="600" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-21" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Ålder 1&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-22" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Ålder 2&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-23" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Ålder 3&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="160" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-24" value="&lt;font style=&quot;font-size: 9px;&quot;&gt;Ålder 4&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="210" y="690" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-25" value="Tidtillägg per ledtråd" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="87.5" y="715" width="125" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-26" value="Svårighetsgrad" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="100" y="660" width="95" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-27" value="Titel" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="430" y="620" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-28" value="Start" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="415" y="650" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-29" value="Avsluta" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="415" y="770" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-30" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 8px;&quot;&gt;Expansion 1-knappen&lt;/font&gt;&lt;br&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="415" y="730" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-31" value="Inställningar" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="415" y="690" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-32" value="&lt;div&gt;Hjälptext / Bilder här&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Hjälprutan ligger ovanpå de andra&lt;/div&gt;&lt;div&gt;elementen i spelfönstret, men blir&lt;/div&gt;&lt;div&gt;synlig när man trycker på &#39;hjälp&#39;.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Innehållet ändras beroende på&lt;/div&gt;&lt;div&gt;vilket skiffer/kryptering som används&lt;/div&gt;&lt;div&gt;i frågan.&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="650" y="340" width="200" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-33" value="&lt;font color=&quot;#fcfcfc&quot; style=&quot;font-size: 11px;&quot;&gt;Spelfönstret syns bakom med mörkat innehåll&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="635" y="320" width="230" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-34" value="Tillbaka" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="790" y="350" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-35" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;Ledtråd&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="320" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-36" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;Hjälp&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="530" y="320" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-37" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Fråga X av Y&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="374" y="315" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-38" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;Timer: 00:00&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="315" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-39" value="Fråga här" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="345" width="240" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-40" value="Svar som skriftlig input" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="450" width="180" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-41" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Skicka svar&lt;br&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="520" y="450" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-42" value="&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Ledtråd 1&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 10px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;Innehållet är gömt tills man trycker på &#39;Ledtråd&#39;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;&lt;br&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="480" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-43" value="Ledtråd 3" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="500" y="480" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-44" value="&lt;div style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Ledtråd 2&lt;/font&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 11px;&quot;&gt;&lt;font style=&quot;font-size: 11px;&quot;&gt;Rutan är &#39;mörkad&#39; om det bara finns 1 ledtråd&lt;font style=&quot;font-size: 11px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="415" y="480" width="70" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-45" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" target="vyfioDJnvUCVPaFkAPMJ-3" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="449.71" y="600" as="sourcePoint" />
+            <mxPoint x="449.71" y="570" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-46" value="Tryck på &#39;Start&#39;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="450" y="570" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-47" value="" style="endArrow=classic;html=1;rounded=0;exitX=-0.009;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="vyfioDJnvUCVPaFkAPMJ-1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="300" y="730" as="sourcePoint" />
+            <mxPoint x="260" y="710" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-48" value="&lt;font style=&quot;font-size: 11px;&quot;&gt;Tryck på &#39;Inställningar&#39;&lt;/font&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="260" y="660" width="80" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-49" value="" style="endArrow=classic;html=1;rounded=0;entryX=0;entryY=0.545;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="vyfioDJnvUCVPaFkAPMJ-4" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="575" y="440" as="sourcePoint" />
+            <mxPoint x="625" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vyfioDJnvUCVPaFkAPMJ-50" value="Tryck på &#39;Hjälp&#39;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="580" y="400" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
