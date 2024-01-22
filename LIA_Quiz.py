@@ -1,4 +1,5 @@
-﻿import PySimpleGUI as sg
+﻿from tkinter import ACTIVE
+import PySimpleGUI as sg
 import random
 sg.set_options(font=("Arial Bold", 16))
 
@@ -29,7 +30,6 @@ game_layout = [
     sg.Button(button_text="Hjälp", button_color="#000000 on #03a5fc", key="-HELPSCREEN-")],
    
     #Row2
-    #If you make the width bigger than the window size, it doesn't 'spill over'. It stays in the window instead. Height doesn't work that way tough.
     #disabled=True makes it impossible to write in the multiline, but you can still select the text which is not ideal.
     #TODO: Can't figure out a way to disable/hide the scrollbar.
     [sg.Multiline("Fråga här! \nRad 2 av texten" , size=(720,15), background_color="#150B3F", text_color="#FFFFFF", key="-QUESTIONBOX-" ,disabled=True)],
@@ -37,8 +37,8 @@ game_layout = [
     #Row3
     #default_text needs to be removed manually when typing. Keeping it for now to show what the box is for.
     #expand_x och y makes the elements expand in size until they reach another element. At least I think so.
-    [sg.Input(expand_x=True, expand_y=True, default_text="Skriv svar här"),
-    sg.Button(expand_x=True, expand_y=True, button_text="Skicka Svar" ) ],
+    [sg.Input("Skriv svar här", expand_x=True, expand_y=True, key="-ANSWERBOX-"),
+    sg.Button(expand_x=True, expand_y=True, button_text="Skicka Svar", key="-SUBMIT_ANSWER-") ],
     
     #Row 4
     [sg.Multiline("Ledtråd 1 ", size=(20,10), background_color="#00AA00", disabled=True),
@@ -140,9 +140,24 @@ def pick_Question(placeholder_name):
                     window["-QUESTIONBOX-"].update(placeholder_name[random_question].text)
                     x.selected = True
                     new_question = True
+                    #The currently selected question is put inside the global variable 'active_question' for use in other functions.
+                    global active_question
+                    active_question = x
                 #If the ID and random number match, but the question has been selected already, it breaks and generates a new number:
                 elif x.selected == True:
                     break
+
+#ANSWERBOX , SUBMIT_ANSWER
+def check_Answer():
+    #active_question from 'pick_Question' is used so you don't have to loop through every question in the game when checking the answer
+    global active_question
+    #Found out how to use 'values' to fetch elements here: https://www.reddit.com/r/learnpython/comments/f4t73m/didnt_understand_the_key_concept_in_pysimplegui/
+    answer = values["-ANSWERBOX-"]
+    #TODO: solution is case sensitive. Make function that transforms capital letters into small ones?
+    if answer == active_question.solution:
+        print("japp")
+    else:
+        print("nepp")
 
 #Makes the program loop, otherwise it closes down upon clicking any button.
 while True:
@@ -163,6 +178,8 @@ while True:
         window["-COL2-"].update(visible=True)
         #TODO: Change when the game picks a new question, instead of just when you change to the game view.
         pick_Question(question_list)
+    if event == "-SUBMIT_ANSWER-":
+        check_Answer()
     #Settings menu can only be accessed from the main menu, so only those layouts need to be adjusted.
     if event == "-SETTINGS-":
         window["-COL1-"].update(visible=False)
