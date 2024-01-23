@@ -1,5 +1,6 @@
 ﻿import PySimpleGUI as sg
 import random
+import time
 sg.set_options(font=("Arial Bold", 16))
 
 #Global variables that handle some UI elements. Have to be above the places they're used, so put them up top.
@@ -26,7 +27,7 @@ game_layout = [
     [sg.Button(button_text="Ledtråd", button_color="#000000 on #00AA00" ),
     #Text elements match the window background
     sg.Text(f"Fråga {question_number} av {max_questions}", size=(15,1), background_color="#555555", key="-GAMEQUESTIONS-"), 
-    sg.Text("Timer:  ", size=(15,1), background_color="#555555"),
+    sg.Text("Timer:  ", size=(15,1), background_color="#555555", key="-GAMETIMER-"),
     #Reveals the main_menu_layout and hides the game on click.
     #TODO: Remove the placeholder button that goes back to the main menu from the game once its no longer needed.
     sg.Button(button_text="MainMenu", button_color="#000000 on #FFFFFF", key="-PLACEHOLDERMENU-"  ),
@@ -190,10 +191,26 @@ def set_Max_Questions():
         #Updates the question display in the game view
         window["-GAMEQUESTIONS-"].update(f"Fråga {question_number} av {max_questions}")
 
+#Global variables used to compare the clock at the start of the game and once you submit your answer
+timer_start = 0
+
+#Sets the timer_start variable to the current system time. Function is called once you press the 'start' button on the main menu.
+def start_Timer():
+    global timer_start
+    timer_start = time.time()
+
+#Updates the timer to be 'current system time' - 'system time at match start'. Gives the elapsed time in seconds.
+def update_Timer():
+    global timer_start
+    total_time = round((time.time() - timer_start),2) 
+    window["-GAMETIMER-"].update(f"Timer: {total_time}")
+        
+
 #Makes the program loop, otherwise it closes down upon clicking any button.
 while True:
     #TODO: Check if the preset event == 'Exit' is needed. If it isn't, delete it.
     event, values = window.read()
+
     if event == sg.WIN_CLOSED or event == "Exit" or event == "-QUIT-":
         break
     #print (event, values)
@@ -209,8 +226,12 @@ while True:
         window["-COL2-"].update(visible=True)
         #TODO: Change when the game picks a new question, instead of just when you change to the game view.
         pick_Question(question_list)
+        start_Timer()
+        #Makes the initial timer display as 0.0 for testing.
+        #update_Timer()
     if event == "-SUBMIT_ANSWER-":
         check_Answer()
+        update_Timer()
     #Settings menu can only be accessed from the main menu, so only those layouts need to be adjusted.
     if event == "-SETTINGS-":
         window["-COL1-"].update(visible=False)
@@ -225,12 +246,15 @@ while True:
     if event == "-EXITHELP-":
         window["-COL2-"].update(visible=True)
         window["-COL4-"].update(visible=False)
+        #Update the timer display, since it's visible again.
+        update_Timer()
     #Ifs that change the max_question amount
     if event == "-SUBQUESTION-" or event == "-ADDQUESTION-":
         set_Max_Questions()
         print(max_questions)
         #NOTE: Think the max_questions value inside the textbox is an int? Not sure tough
         window["-MAXQUESTIONDISPLAY-"].update(max_questions)
+    #  
     #Ends the game once you answer enough questions.
     #TODO: Some sort of result screen instead of just closing the program
     if question_number == max_questions+1:
