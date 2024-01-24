@@ -1,4 +1,5 @@
-﻿import PySimpleGUI as sg
+﻿from tkinter import ACTIVE
+import PySimpleGUI as sg
 import random
 import time
 sg.set_options(font=("Arial Bold", 16))
@@ -20,14 +21,13 @@ main_menu_layout = [
     [sg.Button(button_text="Stäng av", size=(10, 1), button_color="#FFFFFF on #150B3F", key="-QUIT-")]
 ]
 
-
 game_layout = [
     #Row 1
     #For button_color, first code is text color, second is background
-    [sg.Button(button_text="Ledtråd", button_color="#000000 on #00AA00" ),
+    [sg.Button(button_text="Ledtråd", button_color="#000000 on #00AA00", key="-HINTBUTTON-" ),
     #Text elements match the window background
     sg.Text(f"Fråga {question_number} av {max_questions}", size=(15,1), background_color="#555555", key="-GAMEQUESTIONS-"), 
-    sg.Text("Timer:  ", size=(15,1), background_color="#555555", key="-GAMETIMER-"),
+    sg.Text("Tid:  ", size=(15,1), background_color="#555555", key="-GAMETIMER-"),
     #Reveals the main_menu_layout and hides the game on click.
     #TODO: Remove the placeholder button that goes back to the main menu from the game once its no longer needed.
     sg.Button(button_text="MainMenu", button_color="#000000 on #FFFFFF", key="-PLACEHOLDERMENU-"  ),
@@ -35,8 +35,8 @@ game_layout = [
    
     #Row2
     #disabled=True makes it impossible to write in the multiline, but you can still select the text which is not ideal.
-    #TODO: Can't figure out a way to disable/hide the scrollbar.
-    [sg.Multiline("Fråga här! \nRad 2 av texten" , size=(720,15), background_color="#150B3F", text_color="#FFFFFF", key="-QUESTIONBOX-" ,disabled=True)],
+    #TODO: no_scrollbar=True to get rid of scrollbars if they're not needed
+    [sg.Multiline("Fråga här! \nRad 2 av texten" , size=(720,15), background_color="#150B3F", text_color="#FFFFFF", key="-QUESTIONBOX-" , disabled=True)],
    
     #Row3
     #default_text needs to be removed manually when typing. Keeping it for now to show what the box is for.
@@ -45,9 +45,9 @@ game_layout = [
     sg.Button(expand_x=True, expand_y=True, button_text="Skicka Svar", key="-SUBMIT_ANSWER-") ],
     
     #Row 4
-    [sg.Multiline("Ledtråd 1 ", size=(20,10), background_color="#00AA00", disabled=True),
-    sg.Multiline("Ledtråd 2 ", size=(20,10), background_color="#00AA00", disabled=True),
-    sg.Multiline("Ledtråd 3 ", size=(20,10), background_color="#00AA00", disabled=True)]
+    [sg.Text("Ledtråd 1 \n rad 2", size=(20,10), text_color="#00AA00", background_color="#00AA00", key="-HINTBOX1-"),
+    sg.Text("Ledtråd 2 ", size=(20,10), text_color="#00AA00", background_color="#00AA00", key="-HINTBOX2-"),
+    sg.Text("Ledtråd 3 ", size=(20,10), text_color="#00AA00", background_color="#00AA00", key="-HINTBOX3-")]
 ]
 
 settings_layout = [
@@ -105,10 +105,12 @@ window = sg.Window("Game Window", program_layout, size=(800, 800), background_co
 #Class used to create the questions as objects.
 #text = str, solution = str, hints = str (for now), cipher = str, image = str path to the image, cipher_image = same as image, selected = bool, default to False, q_id = int
 class Question:
-    def __init__(self, text, solution, hints, cipher, image, cipher_image, selected, q_id):
+    def __init__(self, text, solution, hint1, hint2, hint3, cipher, image, cipher_image, selected, q_id):
         self.text = text
         self.solution = solution
-        self.hints = hints
+        self.hint1 = hint1
+        self.hint2 = hint2
+        self.hint3 = hint3
         self.cipher = cipher
         self.image = image
         self.cipher_image = cipher_image
@@ -116,14 +118,91 @@ class Question:
         self.q_id = q_id
 
 #Placeholder values while testing question functions
-question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hints here", "Cipher here", "image path here", "cipher image path here", False, 0)
-question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hints here", "Cipher here", "image path here", "cipher image path here", False, 1)
-question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hints here", "Cipher here", "image path here", "cipher image path here", False, 2)
+#Empty hints should be given the value "" to work with functions.
+#FIXME: Make question attributes stack vertically for readability?
+question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "Cipher here", "image path here", "cipher image path here", False, 0)
+question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "Cipher here", "image path here", "cipher image path here", False, 1)
+question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "Cipher here", "image path here", "cipher image path here", False, 2)
 
 #List to loop through to check the available questions.
 question_list = [question1, question2, question3]
 used_question_list = []
 
+#TODO: Make hintboxes invisible if they're empty? Right now they shift to a darker shade of green.
+#Put the text-values inside the hintbox elements. Also changes background and text color to indicate if the hint is available or not.
+#In other words, if there is no hint 2 or 3, the box becomes a darker shade. Text color is set to match the lighter shade if a hint is in the box to make it unreadable.
+def set_hints():
+    global question_list
+    global active_question
+    for x in question_list:
+        if x.q_id == active_question.q_id:
+            #Questions always have at least one hint, so it always updates hintbox1
+            window["-HINTBOX1-"].update(f"{x.hint1}")
+            #If the object has a hint2 value, it gets put into the box with the same color as the background to make the text invisible
+            if x.hint2 != "":
+                window["-HINTBOX2-"].update(f"{x.hint2}")
+                window["-HINTBOX2-"].update(background_color="#00AA00")
+                window["-HINTBOX2-"].update(text_color="#00AA00")
+                if x.hint3 != "":
+                    window["-HINTBOX3-"].update(f"{x.hint3}")
+                    window["-HINTBOX3-"].update(background_color="#00AA00")
+                    window["-HINTBOX3-"].update(text_color="#00AA00")
+                else:
+                    window["-HINTBOX3-"].update("")
+                    window["-HINTBOX3-"].update(background_color="#004400")
+                    break
+            #If hint2 is empty, then hint3 is also always empty and gets darkened at the same time.
+            else:
+                window["-HINTBOX2-"].update("")
+                window["-HINTBOX2-"].update(background_color="#004400")
+                #Updates box3 even if the second hint is empty.
+                #Otherwise, if the game starts with a question that only has 1 hint, box3 will be light green like it has a hint when it doesn't.
+                window["-HINTBOX3-"].update("")
+                window["-HINTBOX3-"].update(background_color="#004400")
+                break
+
+#Globals to verify hint-text visibility
+hint1_visible = False
+hint2_visible = False
+hint3_visible = False
+
+#Changes the text-color of the next hint so that it becomes readable.
+#FIXME: While loop might not be needed?
+def reveal_hint():
+    new_hint = False
+    global hint1_visible
+    global hint2_visible
+    global hint3_visible
+    while new_hint == False:
+        if hint1_visible == False:
+            window["-HINTBOX1-"].update(text_color="#FFFFFF")
+            #TODO: Add time to timer here
+            hint1_visible = True
+            new_hint = True
+        elif hint2_visible == False:
+            window["-HINTBOX2-"].update(text_color="#FFFFFF")
+            #TODO: Add time to timer here
+            hint2_visible = True
+            new_hint = True
+        elif hint3_visible == False:
+            window["-HINTBOX3-"].update(text_color="#FFFFFF")
+            #TODO: Add time to timer here
+            hint3_visible = True
+            new_hint = True
+        #If all hints have been revealead, break the loop without doing anything
+        else:
+            break
+        
+#Resets the hint_visible variables so they work for the next question.
+def hide_hints():
+    global hint1_visible
+    global hint2_visible
+    global hint3_visible
+    hint1_visible = False
+    hint2_visible = False
+    hint3_visible = False
+    #There is always a hint1, so text_color is changed to the element background one here to hide it.
+    window["-HINTBOX1-"].update(text_color="#00AA00")
 
 #Function had to be placed outside of the Question class, since the question lists are 'list' objects and not 'Question'.
 #Placing the function like this means it can be called without doing 'object_name.pick_Question'.
@@ -175,6 +254,9 @@ def check_Answer():
         window["-GAMEQUESTIONS-"].update(f"Fråga {question_number} av {max_questions}")
         #Picks a new question on correct answer
         pick_Question(question_list)
+        #Changes the hint text for the next question and hides them again on correct answer.
+        set_hints()
+        hide_hints()
     else:
         print("nepp")
 
@@ -193,6 +275,7 @@ def set_Max_Questions():
 
 #Global variables used to compare the clock at the start of the game and once you submit your answer
 timer_start = 0
+total_time = 0
 
 #Sets the timer_start variable to the current system time. Function is called once you press the 'start' button on the main menu.
 def start_Timer():
@@ -202,8 +285,9 @@ def start_Timer():
 #Updates the timer to be 'current system time' - 'system time at match start'. Gives the elapsed time in seconds.
 def update_Timer():
     global timer_start
+    global total_time
     total_time = round((time.time() - timer_start),2) 
-    window["-GAMETIMER-"].update(f"Timer: {total_time}")
+    window["-GAMETIMER-"].update(f"Tid: {total_time}")
         
 
 #Makes the program loop, otherwise it closes down upon clicking any button.
@@ -224,8 +308,8 @@ while True:
     if event == "-GAMEWINDOW-":
         window["-COL1-"].update(visible=False)
         window["-COL2-"].update(visible=True)
-        #TODO: Change when the game picks a new question, instead of just when you change to the game view.
         pick_Question(question_list)
+        set_hints()
         start_Timer()
         #Makes the initial timer display as 0.0 for testing.
         #update_Timer()
@@ -254,10 +338,14 @@ while True:
         print(max_questions)
         #NOTE: Think the max_questions value inside the textbox is an int? Not sure tough
         window["-MAXQUESTIONDISPLAY-"].update(max_questions)
-    #  
+    #Reveals the next hint
+    if event == "-HINTBUTTON-":
+        reveal_hint()
     #Ends the game once you answer enough questions.
     #TODO: Some sort of result screen instead of just closing the program
     if question_number == max_questions+1:
-        print("Du vann!")
+        #Updates the total_time variable in order to get the completion time for the match.
+        update_Timer()
+        print(f"Du vann! Din slutliga tid är: {total_time}")
         break
 window.close()
