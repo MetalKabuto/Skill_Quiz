@@ -1,5 +1,4 @@
-﻿from tkinter import ACTIVE
-import PySimpleGUI as sg
+﻿import PySimpleGUI as sg
 import random
 import time
 sg.set_options(font=("Arial Bold", 16))
@@ -7,6 +6,8 @@ sg.set_options(font=("Arial Bold", 16))
 #Global variables that handle some UI elements. Have to be above the places they're used, so put them up top.
 question_number = 1
 max_questions = 10
+#Used to determine the penalty for using a hint
+hint_penalty = 15
 
 main_menu_layout = [
     #Row1
@@ -54,9 +55,9 @@ settings_layout = [
     #Row 1, Text has no size, that way it only uses the necessary space for the text and will align horizontally.
     [sg.Text("Antal Frågor", background_color="#555555", text_color="#FFFFFF", font=("Arial Bold", 16, "underline"))],
     #Row 2
-    [sg.Button(button_text="-", button_color="#150B3F", size=(2,1)),
-    sg.Text("X", background_color="#FFFFFF", text_color="#000000"),
-    sg.Button(button_text="+", button_color="#150B3F", size=(2,1))],
+    [sg.Button(button_text="-", button_color="#150B3F", size=(2,1), key="-SUBQUESTION-"),
+    sg.Text(f"{max_questions}", background_color="#FFFFFF", text_color="#000000", key="-MAXQUESTIONDISPLAY-"),
+    sg.Button(button_text="+", button_color="#150B3F", size=(2,1), key="-ADDQUESTION-")],
     #Row 3, Text
     [sg.Text("Svårighetsgrad", background_color="#555555", text_color="#FFFFFF", font=("Arial Bold", 16, "underline"))],
     #Row 4, Difficulty
@@ -68,9 +69,9 @@ settings_layout = [
     #Row 5, Text
     [sg.Text("Tidstillägg per ledtråd:", background_color="#555555", text_color="#FFFFFF", font=("Arial Bold", 16, "underline"))],
     #Row 6, Time penalty for using a hint
-    [sg.Button(button_text="-", button_color="#150B3F", size=(2,1), key="-SUBQUESTION-"),
-    sg.Text(f"{max_questions}", background_color="#FFFFFF", text_color="#000000", key="-MAXQUESTIONDISPLAY-"),
-    sg.Button(button_text="+", button_color="#150B3F", size=(2,1), key="-ADDQUESTION-")],
+    [sg.Button(button_text="-", button_color="#150B3F", size=(2,1), key="-SUBPENALTY-"),
+    sg.Text(f"{hint_penalty}s", background_color="#FFFFFF", text_color="#000000", key="-PENALTYDISPLAY-"),
+    sg.Button(button_text="+", button_color="#150B3F", size=(2,1), key="-ADDPENALTY-")],
     #Row 7, back to main menu.
     [sg.Button(button_text="Tillbaka", button_color="#FFFFFF on #150B3F", key="-MAINMENU-" )]
 ]
@@ -80,7 +81,7 @@ help_layout = [
     #Row 1. Button is on its own row to place it above the text in the layout.
     [sg.Button(button_text="Tillbaka", button_color="#FFFFFF on #150B3F", key="-EXITHELP-" )],
     #Row 2
-    [sg.Multiline("Hjälptext här! \nRad 2 av texten" , size=(720,25), background_color="#03a5fc", text_color="#000000", disabled=True)],
+    [sg.Multiline("Hjälptext här! \nRad 2 av texten" , size=(720,25), background_color="#03a5fc", text_color="#000000", disabled=True, key="-HELPTEXT-")],
     #Row 3, reserved for eventual images. Images should be GIF or PNG only according to pysimplegui.
     [sg.Image()]
 ]
@@ -120,13 +121,48 @@ class Question:
 #Placeholder values while testing question functions
 #Empty hints should be given the value "" to work with functions.
 #FIXME: Make question attributes stack vertically for readability?
-question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "Cipher here", "image path here", "cipher image path here", False, 0)
-question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "Cipher here", "image path here", "cipher image path here", False, 1)
-question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "Cipher here", "image path here", "cipher image path here", False, 2)
+question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", "image path here", "cipher image path here", False, 0)
+question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", "image path here", "cipher image path here", False, 1)
+question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", "image path here", "cipher image path here", False, 2)
+question4 = Question("Question4 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", "image path here", "cipher image path here", False, 3)
 
 #List to loop through to check the available questions.
-question_list = [question1, question2, question3]
+question_list = [question1, question2, question3, question4]
 used_question_list = []
+
+#List containing all the ciphers used for the questions. Might not be needed?
+cipher_list = ["caesar", "scout", "hexadecimal", "binary"]
+
+#Contains the helptext for the various ciphers. In order according to the cipher_list entries.
+cipher_help_list = ["Text som förklarar hur ceasar-skiffer fungerar här.",
+                    "Text för SCOUT-krypto här",
+                    "Hexadecimal förklaring.",
+                    "Binär kod förklaring här."]
+
+#FIXME: Think you can remove global for lists? cipher_help_list works even tough i didn't declare global first.
+def pick_help_text():
+    global question_list
+    global active_question
+    #Variables used to handle the while loop
+    help_selected = False
+    list_index = 0
+    while help_selected == False:
+        #Loops through all questions in the list
+        for x in question_list:
+            #If the object matches the active question, it adds the active questions helptext to the display
+            if x.q_id == active_question.q_id:
+                window["-HELPTEXT-"].update(f"{cipher_help_list[list_index]}")
+                help_selected = True
+            #If it doesn't match, checks the next index
+            else:
+                list_index += 1
+
+                
+
+#Globals used to check if hints have text or not
+hint1_exists = False
+hint2_exists = False
+hint3_exists = False
 
 #TODO: Make hintboxes invisible if they're empty? Right now they shift to a darker shade of green.
 #Put the text-values inside the hintbox elements. Also changes background and text color to indicate if the hint is available or not.
@@ -134,19 +170,25 @@ used_question_list = []
 def set_hints():
     global question_list
     global active_question
+    global hint1_exists
+    global hint2_exists
+    global hint3_exists
     for x in question_list:
         if x.q_id == active_question.q_id:
             #Questions always have at least one hint, so it always updates hintbox1
             window["-HINTBOX1-"].update(f"{x.hint1}")
+            hint1_exists = True
             #If the object has a hint2 value, it gets put into the box with the same color as the background to make the text invisible
             if x.hint2 != "":
                 window["-HINTBOX2-"].update(f"{x.hint2}")
                 window["-HINTBOX2-"].update(background_color="#00AA00")
                 window["-HINTBOX2-"].update(text_color="#00AA00")
+                hint2_exists = True
                 if x.hint3 != "":
                     window["-HINTBOX3-"].update(f"{x.hint3}")
                     window["-HINTBOX3-"].update(background_color="#00AA00")
                     window["-HINTBOX3-"].update(text_color="#00AA00")
+                    hint3_exists = True
                 else:
                     window["-HINTBOX3-"].update("")
                     window["-HINTBOX3-"].update(background_color="#004400")
@@ -173,20 +215,26 @@ def reveal_hint():
     global hint1_visible
     global hint2_visible
     global hint3_visible
+    global hint1_exists
+    global hint2_exists
+    global hint3_exists
     while new_hint == False:
-        if hint1_visible == False:
+        if hint1_visible == False and hint1_exists == True:
             window["-HINTBOX1-"].update(text_color="#FFFFFF")
-            #TODO: Add time to timer here
+            #Adds time to timer here
+            add_time_penalty()
             hint1_visible = True
             new_hint = True
-        elif hint2_visible == False:
+        elif hint2_visible == False and hint2_exists == True:
             window["-HINTBOX2-"].update(text_color="#FFFFFF")
-            #TODO: Add time to timer here
+            #Adds time to timer here
+            add_time_penalty()
             hint2_visible = True
             new_hint = True
-        elif hint3_visible == False:
+        elif hint3_visible == False and hint3_exists == True:
             window["-HINTBOX3-"].update(text_color="#FFFFFF")
-            #TODO: Add time to timer here
+            #Adds time to timer here
+            add_time_penalty()
             hint3_visible = True
             new_hint = True
         #If all hints have been revealead, break the loop without doing anything
@@ -198,9 +246,15 @@ def hide_hints():
     global hint1_visible
     global hint2_visible
     global hint3_visible
+    global hint1_exists
+    global hint2_exists
+    global hint3_exists
     hint1_visible = False
     hint2_visible = False
     hint3_visible = False
+    hint1_exists = False
+    hint2_exists = False
+    hint3_exists = False
     #There is always a hint1, so text_color is changed to the element background one here to hide it.
     window["-HINTBOX1-"].update(text_color="#00AA00")
 
@@ -242,7 +296,7 @@ def pick_Question(placeholder_name):
 def check_Answer():
     #active_question from 'pick_Question' is used so you don't have to loop through every question in the game when checking the answer
     global active_question
-    #The global question variables are used to upadte UI elements
+    #The global question variables are used to update UI elements
     global question_number
     #Found out how to use 'values' to fetch elements here: https://www.reddit.com/r/learnpython/comments/f4t73m/didnt_understand_the_key_concept_in_pysimplegui/
     answer = values["-ANSWERBOX-"]
@@ -254,9 +308,13 @@ def check_Answer():
         window["-GAMEQUESTIONS-"].update(f"Fråga {question_number} av {max_questions}")
         #Picks a new question on correct answer
         pick_Question(question_list)
+        #Updates the help-text to fit the next question.
+        pick_help_text()
+        #hide_hints needs to be first to change the global variables.
+        #This is because set_ makes some variables True, when hide_ makes all of them False again.
+        hide_hints()
         #Changes the hint text for the next question and hides them again on correct answer.
         set_hints()
-        hide_hints()
     else:
         print("nepp")
 
@@ -272,10 +330,22 @@ def set_Max_Questions():
         max_questions += 1
         #Updates the question display in the game view
         window["-GAMEQUESTIONS-"].update(f"Fråga {question_number} av {max_questions}")
+    #Updates the display in the settings view
+    window["-MAXQUESTIONDISPLAY-"].update(max_questions)
+        
+def set_Penalty_Time():
+    global hint_penalty
+    if event == "-SUBPENALTY-":
+        hint_penalty -= 1
+    elif event == "-ADDPENALTY-":
+        hint_penalty += 1
+    #Had to use string interpolation in order to keep the s after the time
+    window["-PENALTYDISPLAY-"].update(f"{hint_penalty}s")
 
 #Global variables used to compare the clock at the start of the game and once you submit your answer
 timer_start = 0
 total_time = 0
+total_penalty = 0
 
 #Sets the timer_start variable to the current system time. Function is called once you press the 'start' button on the main menu.
 def start_Timer():
@@ -286,9 +356,15 @@ def start_Timer():
 def update_Timer():
     global timer_start
     global total_time
+    global total_penalty
     total_time = round((time.time() - timer_start),2) 
-    window["-GAMETIMER-"].update(f"Tid: {total_time}")
+    window["-GAMETIMER-"].update(f"Tid: {total_time + total_penalty}")
         
+def add_time_penalty():
+    global hint_penalty
+    global total_penalty
+    total_penalty += hint_penalty
+    print(total_penalty)
 
 #Makes the program loop, otherwise it closes down upon clicking any button.
 while True:
@@ -309,6 +385,7 @@ while True:
         window["-COL1-"].update(visible=False)
         window["-COL2-"].update(visible=True)
         pick_Question(question_list)
+        pick_help_text()
         set_hints()
         start_Timer()
         #Makes the initial timer display as 0.0 for testing.
@@ -331,16 +408,16 @@ while True:
         window["-COL2-"].update(visible=True)
         window["-COL4-"].update(visible=False)
         #Update the timer display, since it's visible again.
-        update_Timer()
     #Ifs that change the max_question amount
     if event == "-SUBQUESTION-" or event == "-ADDQUESTION-":
         set_Max_Questions()
-        print(max_questions)
-        #NOTE: Think the max_questions value inside the textbox is an int? Not sure tough
-        window["-MAXQUESTIONDISPLAY-"].update(max_questions)
-    #Reveals the next hint
+    #Ifs that change the time penalty using a hint
+    if event == "-SUBPENALTY-" or event == "-ADDPENALTY-":
+        set_Penalty_Time()
+    #Reveals the next hint. Also adds a time penalty
     if event == "-HINTBUTTON-":
         reveal_hint()
+        update_Timer()
     #Ends the game once you answer enough questions.
     #TODO: Some sort of result screen instead of just closing the program
     if question_number == max_questions+1:
