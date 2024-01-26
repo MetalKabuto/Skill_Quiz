@@ -81,9 +81,9 @@ help_layout = [
     #Row 1. Button is on its own row to place it above the text in the layout.
     [sg.Button(button_text="Tillbaka", button_color="#FFFFFF on #150B3F", key="-EXITHELP-" )],
     #Row 2
-    [sg.Multiline("Hjälptext här! \nRad 2 av texten" , size=(720,25), background_color="#03a5fc", text_color="#000000", disabled=True, key="-HELPTEXT-")],
+    [sg.Multiline("Hjälptext här! \nRad 2 av texten" , size=(720,12.5), background_color="#03a5fc", text_color="#000000", disabled=True, key="-HELPTEXT-")],
     #Row 3, reserved for eventual images. Images should be GIF or PNG only according to pysimplegui.
-    [sg.Image()]
+    [sg.Image(source="", key="-HELPIMAGE-")]
 ]
 
 #Found how to stack layouts here https://stackoverflow.com/questions/59500558/how-to-display-different-layouts-based-on-button-clicks-in-pysimple-gui-persis first answer
@@ -106,38 +106,45 @@ window = sg.Window("Game Window", program_layout, size=(800, 800), background_co
 #Class used to create the questions as objects.
 #text = str, solution = str, hints = str (for now), cipher = str, image = str path to the image, cipher_image = same as image, selected = bool, default to False, q_id = int
 class Question:
-    def __init__(self, text, solution, hint1, hint2, hint3, cipher, image, cipher_image, selected, q_id):
+    def __init__(self, text, solution, hint1, hint2, hint3, cipher, selected, q_id):
         self.text = text
         self.solution = solution
         self.hint1 = hint1
         self.hint2 = hint2
         self.hint3 = hint3
         self.cipher = cipher
-        self.image = image
-        self.cipher_image = cipher_image
         self.selected = selected
         self.q_id = q_id
 
 #Placeholder values while testing question functions
 #Empty hints should be given the value "" to work with functions.
+#Questions cipher attributes must match one of the objects in the cipher_list to make help functions work
 #FIXME: Make question attributes stack vertically for readability?
-question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", "image path here", "cipher image path here", False, 0)
-question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", "image path here", "cipher image path here", False, 1)
-question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", "image path here", "cipher image path here", False, 2)
-question4 = Question("Question4 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", "image path here", "cipher image path here", False, 3)
+question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", False, 0)
+question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", False, 1)
+question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", False, 2)
+question4 = Question("Question4 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", False, 3)
 
 #List to loop through to check the available questions.
 question_list = [question1, question2, question3, question4]
 used_question_list = []
 
-#List containing all the ciphers used for the questions. Might not be needed?
-cipher_list = ["caesar", "scout", "hexadecimal", "binary"]
+class Cipher:
+    def __init__(self, cipher, help_text, help_image):
+        self.cipher = cipher
+        self.help_text = help_text
+        self.help_image = help_image
 
-#Contains the helptext for the various ciphers. In order according to the cipher_list entries.
-cipher_help_list = ["Text som förklarar hur ceasar-skiffer fungerar här.",
-                    "Text för SCOUT-krypto här",
-                    "Hexadecimal förklaring.",
-                    "Binär kod förklaring här."]
+#Folder called _internal is added to the project to simulate installing the game through pyinstaller, which creates a _internal folder to put the images into.
+cipher1 = Cipher("caesar", "Text som förklarar hur caesar-skiffer fungerar här.", "_internal\help_image\caesar_help.png")
+cipher2 = Cipher("scout", "Text för SCOUT-krypto här", "_internal\help_image\scout_help.png")
+cipher3 = Cipher("hexadecimal", "Hexadecimal förklaring.", "_internal\help_image\hex_help.png")
+#FIXME: For some reason the program can't read image files that have \b in them, so for now the file has B instead.
+cipher4 = Cipher("binary", "Binär kod förklaring här.", "_internal\help_image\Binary_help.png")
+
+#List containing all the ciphers used for the questions. Might not be needed?
+cipher_list = [cipher1, cipher2, cipher3, cipher4]
+
 
 #FIXME: Think you can remove global for lists? cipher_help_list works even tough i didn't declare global first.
 def pick_help_text():
@@ -151,7 +158,8 @@ def pick_help_text():
         for x in question_list:
             #If the object matches the active question, it adds the active questions helptext to the display
             if x.q_id == active_question.q_id:
-                window["-HELPTEXT-"].update(f"{cipher_help_list[list_index]}")
+                window["-HELPTEXT-"].update(f"{cipher_list[list_index].help_text}")
+                window["-HELPIMAGE-"].update(f"{cipher_list[list_index].help_image}")
                 help_selected = True
             #If it doesn't match, checks the next index
             else:
@@ -353,6 +361,7 @@ def start_Timer():
     timer_start = time.time()
 
 #Updates the timer to be 'current system time' - 'system time at match start'. Gives the elapsed time in seconds.
+#NOTE: Make the time whole numbers instead of rounding?
 def update_Timer():
     global timer_start
     global total_time
