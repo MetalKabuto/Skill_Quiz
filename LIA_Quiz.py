@@ -62,10 +62,10 @@ settings_layout = [
     [sg.Text("Svårighetsgrad", background_color="#555555", text_color="#FFFFFF", font=("Arial Bold", 16, "underline"))],
     #Row 4, Difficulty
     #TODO: Have a different background color for the currently selected difficulty.
-    [sg.Button(button_text="Ålder 1", button_color="#150B3F"),
-    sg.Button(button_text="Ålder 2", button_color="#150B3F"),
-    sg.Button(button_text="Ålder 3", button_color="#150B3F"),
-    sg.Button(button_text="Ålder 4", button_color="#150B3F")],
+    [sg.Button(button_text="Ålder 1", button_color="#150B3F", key="-DIFF1-"),
+    sg.Button(button_text="Ålder 2", button_color="#150B3F", key="-DIFF2-"),
+    sg.Button(button_text="Ålder 3", button_color="#150B3F", key="-DIFF3-"),
+    sg.Button(button_text="Ålder 4", button_color="#150B3F", key="-DIFF4-")],
     #Row 5, Text
     [sg.Text("Tidstillägg per ledtråd:", background_color="#555555", text_color="#FFFFFF", font=("Arial Bold", 16, "underline"))],
     #Row 6, Time penalty for using a hint
@@ -104,9 +104,9 @@ program_layout = [
 window = sg.Window("Game Window", program_layout, size=(800, 800), background_color="#555555", element_justification="center", element_padding=10)
 
 #Class used to create the questions as objects.
-#text = str, solution = str, hints = str (for now), cipher = str, image = str path to the image, cipher_image = same as image, selected = bool, default to False, q_id = int
+#text = str, solution = str, hints = str (for now), cipher = str, selected = bool, default to False, q_id = int, difficulty = 1-4
 class Question:
-    def __init__(self, text, solution, hint1, hint2, hint3, cipher, selected, q_id):
+    def __init__(self, text, solution, hint1, hint2, hint3, cipher, selected, q_id, difficulty):
         self.text = text
         self.solution = solution
         self.hint1 = hint1
@@ -115,19 +115,26 @@ class Question:
         self.cipher = cipher
         self.selected = selected
         self.q_id = q_id
+        self.difficulty = difficulty
 
 #Placeholder values while testing question functions
 #Empty hints should be given the value "" to work with functions.
 #Questions cipher attributes must match one of the objects in the cipher_list to make help functions work
 #FIXME: Make question attributes stack vertically for readability?
-question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", False, 0)
-question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", False, 1)
-question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", False, 2)
-question4 = Question("Question4 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", False, 3)
+question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", False, 0, 1)
+question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", False, 1, 2)
+question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", False, 2, 3)
+question4 = Question("Question4 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", False, 3, 4)
+question5 = Question("Question5 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", False, 4, 1)
+question6 = Question("Question6 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", False, 5, 2)
+question7 = Question("Question7 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", False, 6, 3)
+question8 = Question("Question8 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", False, 7, 4)
 
 #List to loop through to check the available questions.
-question_list = [question1, question2, question3, question4]
+question_list = [question1, question2, question3, question4, question5, question6, question7, question8]
 used_question_list = []
+selected_questions_list = []
+selected_difficulty = 0
 
 class Cipher:
     def __init__(self, cipher, help_text, help_image):
@@ -145,22 +152,55 @@ cipher4 = Cipher("binary", "Binär kod förklaring här.", "_internal\help_image
 #List containing all the ciphers used for the questions. Might not be needed?
 cipher_list = [cipher1, cipher2, cipher3, cipher4]
 
+#Is called when you press a difficulty button. 
+def difficulty_select():
+    global selected_difficulty
+    global selected_questions_list
+    if event == "-DIFF1-":
+        #Empties the list of items, in case you press the button multiple times.
+        selected_questions_list = []
+        selected_difficulty = 1
+        for x in question_list:
+            if x.difficulty == 1:
+                selected_questions_list.append(x)
+                print("selected list")
+    elif event == "-DIFF2-":
+        selected_questions_list = []
+        selected_difficulty = 2
+        for x in question_list:
+            if x.difficulty == 2:
+                selected_questions_list.append(x)
+                print("selected list")
+    elif event == "-DIFF3-":
+        selected_questions_list = []
+        for x in question_list:
+            if x.difficulty == 3:
+                selected_questions_list.append(x)
+                print("selected list")
+    elif event == "-DIFF4-":
+        selected_questions_list = []
+        for x in question_list:
+            if x.difficulty == 4:
+                selected_questions_list.append(x)
+                print("selected list")
+
+    
 
 #FIXME: Think you can remove global for lists? cipher_help_list works even tough i didn't declare global first.
-def pick_help_text():
-    global question_list
+def pick_help_text(list_name):
     global active_question
     #Variables used to handle the while loop
     help_selected = False
     list_index = 0
     while help_selected == False:
         #Loops through all questions in the list
-        for x in question_list:
+        for x in list_name:
             #If the object matches the active question, it adds the active questions helptext to the display
-            if x.q_id == active_question.q_id:
+            if x.cipher == active_question.cipher:
                 window["-HELPTEXT-"].update(f"{cipher_list[list_index].help_text}")
                 window["-HELPIMAGE-"].update(f"{cipher_list[list_index].help_image}")
                 help_selected = True
+                break
             #If it doesn't match, checks the next index
             else:
                 list_index += 1
@@ -175,13 +215,13 @@ hint3_exists = False
 #TODO: Make hintboxes invisible if they're empty? Right now they shift to a darker shade of green.
 #Put the text-values inside the hintbox elements. Also changes background and text color to indicate if the hint is available or not.
 #In other words, if there is no hint 2 or 3, the box becomes a darker shade. Text color is set to match the lighter shade if a hint is in the box to make it unreadable.
-def set_hints():
-    global question_list
+def set_hints(list_name):
     global active_question
+    global selected_difficulty
     global hint1_exists
     global hint2_exists
-    global hint3_exists
-    for x in question_list:
+    global hint3_exists  
+    for x in list_name:
         if x.q_id == active_question.q_id:
             #Questions always have at least one hint, so it always updates hintbox1
             window["-HINTBOX1-"].update(f"{x.hint1}")
@@ -275,31 +315,46 @@ def pick_Question(placeholder_name):
     #used_question_list is used to break the while loop if you run out of new questions. This means the game doesn't freeze if you use all questions in the list.
     global used_question_list
     #new_question is used to break the while loop once a new question has been chosen
-    new_question = False
-    while new_question == False:
+    next_question = False
+    while next_question == False:
         #Breaks the loop if you run out of unique questions.
         #In other words, if all questions have been chosen and the function is called again, nothing happens. Before, the program would freeze cause of the while loop.
         if len(used_question_list) == len(placeholder_name):
+            print(len(used_question_list))
+            print(len(placeholder_name))
+            print("break")
             break
         #Generates a random number between and including 0 until the length of the list
         random_question = random.randint(0, question_list_length)
-        for x in placeholder_name:
-            #Checks that the question's id matches the random number
-            if x.q_id == random_question:
-                #Checks the selected value, since questions should only appear once each.
-                if x.selected == False:
-                    #If everything checks out, the question is added to the display.
-                    window["-QUESTIONBOX-"].update(placeholder_name[random_question].text)
-                    x.selected = True
-                    new_question = True
-                    #The currently selected question is put inside the global variable 'active_question' for use in other functions.
-                    global active_question
-                    active_question = x
-                    used_question_list.append(x)
-                #If the ID and random number match, but the question has been selected already, it breaks and generates a new number:
-                elif x.selected == True:
-                    break
+        #print("for")
+        #Checks that the question's id matches the random number
+        if placeholder_name[random_question].selected == False:
+            #If everything checks out, the question is added to the display.
+            window["-QUESTIONBOX-"].update(placeholder_name[random_question].text)
+            placeholder_name[random_question].selected = True
+            next_question = True
+            #The currently selected question is put inside the global variable 'active_question' for use in other functions.
+            global active_question
+            active_question = placeholder_name[random_question]
+            used_question_list.append(placeholder_name[random_question])
+            print(active_question)
+            
+                
 
+def new_question():
+    global selected_difficulty
+    #If you haven't altered the difficulty, the game will pick from all questions in the program.
+    if selected_difficulty == 0:
+        pick_Question(question_list)
+        pick_help_text(question_list)
+        set_hints(question_list)
+        print("question")
+    #If you have changed difficulty, it picks a question from the list that gets generated.
+    else:
+        pick_Question(selected_questions_list) 
+        pick_help_text(selected_questions_list)
+        set_hints(selected_questions_list)
+        print("selected")
 
 def check_Answer():
     #active_question from 'pick_Question' is used so you don't have to loop through every question in the game when checking the answer
@@ -308,6 +363,7 @@ def check_Answer():
     global question_number
     #Found out how to use 'values' to fetch elements here: https://www.reddit.com/r/learnpython/comments/f4t73m/didnt_understand_the_key_concept_in_pysimplegui/
     answer = values["-ANSWERBOX-"]
+    global selected_difficulty
     #TODO: solution is case sensitive. Make function that transforms capital letters into small ones?
     if answer == active_question.solution:
         print("japp")
@@ -315,9 +371,12 @@ def check_Answer():
         question_number += 1
         window["-GAMEQUESTIONS-"].update(f"Fråga {question_number} av {max_questions}")
         #Picks a new question on correct answer
-        pick_Question(question_list)
+        new_question()
         #Updates the help-text to fit the next question.
-        pick_help_text()
+        if selected_difficulty == 0:
+            pick_help_text(question_list)
+        else:
+            pick_help_text(selected_questions_list)
         #hide_hints needs to be first to change the global variables.
         #This is because set_ makes some variables True, when hide_ makes all of them False again.
         hide_hints()
@@ -383,7 +442,6 @@ while True:
     if event == sg.WIN_CLOSED or event == "Exit" or event == "-QUIT-":
         break
     #print (event, values)
-   
     #Probably a better way to shift between the menus, but it works for now.
     #COL1 = Main menu, 2 = Game view, 3 = Settings, 4 = Help screen
     #TODO: Remove if for placeholder once it's no longer needed.
@@ -393,9 +451,7 @@ while True:
     if event == "-GAMEWINDOW-":
         window["-COL1-"].update(visible=False)
         window["-COL2-"].update(visible=True)
-        pick_Question(question_list)
-        pick_help_text()
-        set_hints()
+        new_question()
         start_Timer()
         #Makes the initial timer display as 0.0 for testing.
         #update_Timer()
@@ -409,6 +465,7 @@ while True:
     if event == "-MAINMENU-":
         window["-COL1-"].update(visible=True)
         window["-COL3-"].update(visible=False)
+        print(len(selected_questions_list))
     #Ifs for the help view
     if event == "-HELPSCREEN-":
         window["-COL2-"].update(visible=False)
@@ -427,6 +484,9 @@ while True:
     if event == "-HINTBUTTON-":
         reveal_hint()
         update_Timer()
+    #Sets the difficulty variable to 1,2,3,4 depending on button press.
+    if event == "DIFF1" or "DIFF2" or "DIFF3" or "DIFF4":
+        difficulty_select()
     #Ends the game once you answer enough questions.
     #TODO: Some sort of result screen instead of just closing the program
     if question_number == max_questions+1:
