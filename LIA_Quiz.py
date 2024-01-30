@@ -1,4 +1,5 @@
-﻿import PySimpleGUI as sg
+﻿from tkinter import ACTIVE
+import PySimpleGUI as sg
 import random
 import time
 sg.set_options(font=("Arial Bold", 16))
@@ -163,47 +164,47 @@ def difficulty_select():
         for x in question_list:
             if x.difficulty == 1:
                 selected_questions_list.append(x)
-                print("selected list")
+                print("selected")
     elif event == "-DIFF2-":
         selected_questions_list = []
         selected_difficulty = 2
         for x in question_list:
             if x.difficulty == 2:
                 selected_questions_list.append(x)
-                print("selected list")
+                print("selected")
     elif event == "-DIFF3-":
         selected_questions_list = []
+        selected_difficulty = 3
         for x in question_list:
             if x.difficulty == 3:
                 selected_questions_list.append(x)
-                print("selected list")
+                print("selected")
     elif event == "-DIFF4-":
         selected_questions_list = []
+        selected_difficulty = 4
         for x in question_list:
             if x.difficulty == 4:
                 selected_questions_list.append(x)
-                print("selected list")
-
+                print("selected")
     
 
 #FIXME: Think you can remove global for lists? cipher_help_list works even tough i didn't declare global first.
 def pick_help_text(list_name):
-    global active_question
-    #Variables used to handle the while loop
-    help_selected = False
-    list_index = 0
-    while help_selected == False:
-        #Loops through all questions in the list
-        for x in list_name:
-            #If the object matches the active question, it adds the active questions helptext to the display
-            if x.cipher == active_question.cipher:
-                window["-HELPTEXT-"].update(f"{cipher_list[list_index].help_text}")
-                window["-HELPIMAGE-"].update(f"{cipher_list[list_index].help_image}")
-                help_selected = True
-                break
-            #If it doesn't match, checks the next index
-            else:
-                list_index += 1
+    global active_question0
+    #Checks the active questions cipher value to decide what help-items to show.
+    if active_question.cipher == "caesar":
+        window["-HELPTEXT-"].update(f"{cipher_list[0].help_text}")
+        window["-HELPIMAGE-"].update(f"{cipher_list[0].help_image}")
+    elif active_question.cipher == "scout":
+        window["-HELPTEXT-"].update(f"{cipher_list[1].help_text}")
+        window["-HELPIMAGE-"].update(f"{cipher_list[1].help_image}")
+    elif active_question.cipher == "hexadecimal":
+        window["-HELPTEXT-"].update(f"{cipher_list[2].help_text}")
+        window["-HELPIMAGE-"].update(f"{cipher_list[2].help_image}")
+    elif active_question.cipher == "binary":
+        window["-HELPTEXT-"].update(f"{cipher_list[3].help_text}")
+        window["-HELPIMAGE-"].update(f"{cipher_list[3].help_image}")
+
 
                 
 
@@ -320,13 +321,9 @@ def pick_Question(placeholder_name):
         #Breaks the loop if you run out of unique questions.
         #In other words, if all questions have been chosen and the function is called again, nothing happens. Before, the program would freeze cause of the while loop.
         if len(used_question_list) == len(placeholder_name):
-            print(len(used_question_list))
-            print(len(placeholder_name))
-            print("break")
             break
         #Generates a random number between and including 0 until the length of the list
         random_question = random.randint(0, question_list_length)
-        #print("for")
         #Checks that the question's id matches the random number
         if placeholder_name[random_question].selected == False:
             #If everything checks out, the question is added to the display.
@@ -337,7 +334,6 @@ def pick_Question(placeholder_name):
             global active_question
             active_question = placeholder_name[random_question]
             used_question_list.append(placeholder_name[random_question])
-            print(active_question)
             
                 
 
@@ -348,13 +344,11 @@ def new_question():
         pick_Question(question_list)
         pick_help_text(question_list)
         set_hints(question_list)
-        print("question")
     #If you have changed difficulty, it picks a question from the list that gets generated.
     else:
         pick_Question(selected_questions_list) 
         pick_help_text(selected_questions_list)
         set_hints(selected_questions_list)
-        print("selected")
 
 def check_Answer():
     #active_question from 'pick_Question' is used so you don't have to loop through every question in the game when checking the answer
@@ -370,18 +364,11 @@ def check_Answer():
         #Updates the question counter at the top of the window
         question_number += 1
         window["-GAMEQUESTIONS-"].update(f"Fråga {question_number} av {max_questions}")
-        #Picks a new question on correct answer
-        new_question()
-        #Updates the help-text to fit the next question.
-        if selected_difficulty == 0:
-            pick_help_text(question_list)
-        else:
-            pick_help_text(selected_questions_list)
         #hide_hints needs to be first to change the global variables.
         #This is because set_ makes some variables True, when hide_ makes all of them False again.
         hide_hints()
-        #Changes the hint text for the next question and hides them again on correct answer.
-        set_hints()
+        #Picks a new question on correct answer
+        new_question()
     else:
         print("nepp")
 
@@ -432,7 +419,6 @@ def add_time_penalty():
     global hint_penalty
     global total_penalty
     total_penalty += hint_penalty
-    print(total_penalty)
 
 #Makes the program loop, otherwise it closes down upon clicking any button.
 while True:
@@ -465,7 +451,6 @@ while True:
     if event == "-MAINMENU-":
         window["-COL1-"].update(visible=True)
         window["-COL3-"].update(visible=False)
-        print(len(selected_questions_list))
     #Ifs for the help view
     if event == "-HELPSCREEN-":
         window["-COL2-"].update(visible=False)
@@ -485,7 +470,7 @@ while True:
         reveal_hint()
         update_Timer()
     #Sets the difficulty variable to 1,2,3,4 depending on button press.
-    if event == "DIFF1" or "DIFF2" or "DIFF3" or "DIFF4":
+    if event == "-DIFF1-" or "-DIFF2-" or "-DIFF3-" or "-DIFF4-":
         difficulty_select()
     #Ends the game once you answer enough questions.
     #TODO: Some sort of result screen instead of just closing the program
