@@ -1,5 +1,4 @@
-﻿from tkinter import ACTIVE
-import PySimpleGUI as sg
+﻿import PySimpleGUI as sg
 import random
 import time
 sg.set_options(font=("Arial Bold", 16))
@@ -82,7 +81,7 @@ help_layout = [
     #Row 1. Button is on its own row to place it above the text in the layout.
     [sg.Button(button_text="Tillbaka", button_color="#FFFFFF on #150B3F", key="-EXITHELP-" )],
     #Row 2
-    [sg.Multiline("Hjälptext här! \nRad 2 av texten" , size=(720,12.5), background_color="#03a5fc", text_color="#000000", disabled=True, key="-HELPTEXT-")],
+    [sg.Multiline("Hjälptext här! \nRad 2 av texten" , size=(720,5), background_color="#03a5fc", text_color="#000000", disabled=True, no_scrollbar = True, key="-HELPTEXT-")],
     #Row 3, reserved for eventual images. Images should be GIF or PNG only according to pysimplegui.
     [sg.Image(source="", key="-HELPIMAGE-")]
 ]
@@ -144,8 +143,10 @@ class Cipher:
         self.help_image = help_image
 
 #Folder called _internal is added to the project to simulate installing the game through pyinstaller, which creates a _internal folder to put the images into.
-cipher1 = Cipher("caesar", "Text som förklarar hur caesar-skiffer fungerar här.", "_internal\help_image\caesar_help.png")
-cipher2 = Cipher("scout", "Text för SCOUT-krypto här", "_internal\help_image\scout_help.png")
+cipher1 = Cipher("caesar", "Caesarchiffer används genom att byta ut bokstäverna i ett ord mot en anna bokstav ett visst antal steg framåt i alfabetet.", 
+                 "_internal\help_image\caesar_help.png")
+cipher2 = Cipher("scout", "Bokstäverna är placerade i ett rutnät som används för att dekryptera ett ord eller en mening. " + 
+                 "Ett par, EX Ut, ska bytas ut mot bokstaven i rutnätet där U och t möts. OBS: Inga ord använder Q, W, X.", "_internal\help_image\scout_help.png")
 cipher3 = Cipher("hexadecimal", "Hexadecimal förklaring.", "_internal\help_image\hex_help.png")
 #FIXME: For some reason the program can't read image files that have \b in them, so for now the file has B instead.
 cipher4 = Cipher("binary", "Binär kod förklaring här.", "_internal\help_image\Binary_help.png")
