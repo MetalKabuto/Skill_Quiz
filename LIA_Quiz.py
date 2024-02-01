@@ -147,9 +147,11 @@ cipher1 = Cipher("caesar", "Caesarchiffer används genom att byta ut bokstävern
                  "_internal\help_image\caesar_help.png")
 cipher2 = Cipher("scout", "Bokstäverna är placerade i ett rutnät som används för att dekryptera ett ord eller en mening. " + 
                  "Ett par, EX Ut, ska bytas ut mot bokstaven i rutnätet där U och t möts. OBS: Inga ord använder Q, W, X.", "_internal\help_image\scout_help.png")
-cipher3 = Cipher("hexadecimal", "Hexadecimal förklaring.", "_internal\help_image\hex_help.png")
+cipher3 = Cipher("hexadecimal", "Hexadecimal är ett system som använder sig av siffrorna 0-9 och bokstäverna a-f.\n" +
+                 "Varje siffra och bokstav har ett värde från 0 till 15. Hex-tal kan i sin tur konverteras till binära tal eller ASCII tecken.", "_internal\help_image\hex_help.png")
 #FIXME: For some reason the program can't read image files that have \b in them, so for now the file has B instead.
-cipher4 = Cipher("binary", "Binär kod förklaring här.", "_internal\help_image\Binary_help.png")
+cipher4 = Cipher("binary", "Binära tal är en sträng av 8 stycken ettor och nollor.\n" +
+                 "Bokstäver kan skrivas med dessa strängar. Å, Ä och Ö skrivs som två tal efter varann, eftersom de inte finns i engelska alfabetet.", "_internal\help_image\Binary_help.png")
 
 #List containing all the ciphers used for the questions. Might not be needed?
 cipher_list = [cipher1, cipher2, cipher3, cipher4]
