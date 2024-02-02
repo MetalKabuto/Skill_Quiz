@@ -117,21 +117,52 @@ class Question:
         self.q_id = q_id
         self.difficulty = difficulty
 
-#Placeholder values while testing question functions
+
 #Empty hints should be given the value "" to work with functions.
 #Questions cipher attributes must match one of the objects in the cipher_list to make help functions work
-#FIXME: Make question attributes stack vertically for readability?
-question1 = Question("Question1 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", False, 0, 1)
-question2 = Question("Question2 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", False, 1, 2)
-question3 = Question("Question3 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", False, 2, 3)
-question4 = Question("Question4 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", False, 3, 4)
-question5 = Question("Question5 value \nLine 2 test", "Solution here", "Hint1 \n Rad 2", "", "", "caesar", False, 4, 1)
-question6 = Question("Question6 value \nLine fghgfhgfhgfh", "Solution here", "Hint1 \n Rad 2", "Hint2", "", "scout", False, 5, 2)
-question7 = Question("Question7 value \nLine asdasdasdasd", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "hexadecimal", False, 6, 3)
-question8 = Question("Question8 value \nLine bnmbnmbnmbnmbnm", "Solution here", "Hint1 \n Rad 2", "Hint2", "Hint3", "binary", False, 7, 4)
+#TODO: For now, all questions of the same type have the same difficulty. Add more questions to flesh out the difficulty options, so that all types can be found in all diccifulties.
+#Caesar questions
+caesar_q1 = Question("Dekryptera ordet: ern \nnyckel = 3", "bok", "Byt ut bokstäverna mot de 3 steg bakåt i alfabetet.", "", "", "caesar", False, 0, 1)
+caesar_q2 = Question("Dekryptera ordet: mdxy \nnyckel = 5", "häst", "Byt ut bokstäverna mot de 5 steg bakåt i alfabetet.", "", "", "caesar", False, 1, 1)
+caesar_q3 = Question("Dekryptera ordet: hveoi \nnyckel = 4", "drake", "Byt ut bokstäverna mot de 4 steg bakåt i alfabetet.", "", "", "caesar", False, 2, 1)
+caesar_q4 = Question("Dekryptera ordet: mrughq \nnyckel = 3", "jorden", "Byt ut bokstäverna mot de 3 steg bakåt i alfabetet.", "", "", "caesar", False, 3, 1)
+caesar_q5 = Question("Dekryptera ordet: hexsv \nnyckel = 4", "dator", "Byt ut bokstäverna mot de 4 steg bakåt i alfabetet.", "", "", "caesar", False, 4, 1)
+caesar_q6 = Question("Dekryptera ordet: uwtlwfrrjwnsl \nnyckel = 5", "programmering", "Byt ut bokstäverna mot de 5 steg bakåt i alfabetet.", "", "", "caesar", False, 5, 1)
+caesar_q7 = Question("Dekryptera ordet: doir \nnyckel = 4", "öken", "Byt ut bokstäverna mot de 4 steg bakåt i alfabetet.", "", "", "caesar", False, 6, 1)
+caesar_q8 = Question("Dekryptera ordet: bghovwhq \nnyckel = 3", "ädelsten", "Byt ut bokstäverna mot de 3 steg bakåt i alfabetet.", "", "", "caesar", False, 7, 1)
+#SCOUT questions
+scout_q1 = Question("Dekryptera ordet med SCOUT: Tu Cc Cc Co Ss", "uggla", "Byt ut paren mot bokstaven där koordinaterna möts.", "", "", "scout", False, 8, 2)
+scout_q2 = Question("Dekryptera ordet med SCOUT: Tt Us Co Ss", "ödla", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 9, 2)
+scout_q3 = Question("Dekryptera ordet med SCOUT: Su Cu Ts Ou Uc Us Ts Uo Uu", "president", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 10, 2)
+scout_q4 = Question("Dekryptera ordet med SCOUT: Ou Pu Tt So Ts", "spöke", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 11, 2)
+scout_q5 = Question("Dekryptera ordet med SCOUT: Ts Co Ts Sc Ss Uo Uu", "elefant", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 12, 2)
+scout_q6 = Question("Dekryptera ordet med SCOUT: Cs Ct Uu Ts", "byte", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 13, 2)
+scout_q7 = Question("Dekryptera ordet med SCOUT: Uo Ut Uu St Ts Cu So", "nätverk", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 14, 2)
+scout_q8 = Question("Dekryptera ordet med SCOUT: Cs Uc Co", "bil", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 15, 2)
+scout_q9 = Question("Dekryptera ordet med SCOUT: Us Ts Os Uc Oo Ss Co", "decimal", "Byt ut paren mot bokstaven där de möts.", "", "", "scout", False, 16, 2)
+#Hex questions. TODO: Ska svaret vara stor eller liten bokstav? De har olika hexvärden.
+hex_q1 = Question("Vilken bokstav blir hextalet: 44 \nSvara med stor bokstav!", "D", "Bokstaven ligger mellan A och I.", "", "", "hexadecimal", False, 17, 3)
+hex_q2 = Question("Vilken bokstav blir hextalet: 59 \nSvara med stor bokstav!", "Y", "Bokstaven är en av de 5 sista.", "", "", "hexadecimal", False, 18, 3)
+hex_q3 = Question("Vilken bokstav blir hextalet: 4c \nSvara med stor bokstav!", "L", "Bokstaven ligger mellan H och Q.", "", "", "hexadecimal", False, 19, 3)
+hex_q4 = Question("Vilken bokstav blir hextalet: 4a \nSvara med stor bokstav!", "J", "Bokstaven är en av de 10 första.", "", "", "hexadecimal", False, 20, 3)
+hex_q5 = Question("Vilken bokstav blir hextalet: 55 \nSvara med stor bokstav!", "U", "Bokstaven ligger mellan S och Z.", "", "", "hexadecimal", False, 21, 3)
+hex_q6 = Question("Översätt ordet från hextal: 42 (c3 84) 53 54 \nSvara med stora bokstäver!", "BÄST", "Ordet börjar med B.", "(c3 84) är en bokstav.", "", "hexadecimal", False, 22, 3)
+hex_q7 = Question("Översätt ordet från hextal: 53 4b (c3 96) 4c 44 \nSvara med stora bokstäver!", "SKÖLD", "Ordet börjar med S.", "(c3 96) är en bokstav.", "", "hexadecimal", False, 23, 3)
+#Binary questions
+bin_q1 = Question("Vilken bokstav blir det binära talet: 01 00 10 10 \nSvara med stor bokstav!", "J", "Bokstaven kommer efter D.", "De första 5 siffrorna är 01 00 1_ __", "", "binary", False, 24, 4)
+bin_q2 = Question("Vilken bokstav blir det binära talet: 01 00 11 11 \nSvara med stor bokstav!", "O", "Bokstaven kommer före R.", "De första 5 siffrorna är 01 00 1_ __", "", "binary", False, 25, 4)
+bin_q3 = Question("Vilken bokstav blir det binära talet: 01 00 11 01 \nSvara med stor bokstav!", "M", "Bokstaven kommer efter I.", "De första 5 siffrorna är 01 00 1_ __", "", "binary", False, 26, 4)
+bin_q4 = Question("Vilken bokstav blir det binära talet: 01 00 10 11 \nSvara med stor bokstav!", "K", "Boktaven kommer före O.", "De första 5 siffrorna är 01 00 1_ __", "", "binary", False, 27, 4)
+bin_q5 = Question("Översätt ordet från binär kod: (01 01 00 11) (01 01 01 00) (01 00 01 01) (01 00 11 10) \nSvara med stora bokstäver!", "STEN", "Ordet börjar med S.", "Ordet slutar med N.", "", "binary", False, 28, 4)
+bin_q6 = Question("Översätt ordet från binär kod: (01 01 01 00) (01 01 00 10) (11 00 00 11 10 00 01 00) (01 00 01 00) \nSvara med stora bokstäver!", "TRÄD", "Ordet börjar med T.", "(11 00 00 11 10 00 01 00) är en bokstav.", "Andra bokstaven är R.", "binary", False, 29, 4)
 
 #List to loop through to check the available questions.
-question_list = [question1, question2, question3, question4, question5, question6, question7, question8]
+question_list = [
+    caesar_q1, caesar_q2, caesar_q3, caesar_q4, caesar_q5, caesar_q6, caesar_q7, caesar_q8,
+    scout_q1, scout_q2, scout_q3, scout_q4, scout_q5, scout_q6, scout_q7, scout_q8, scout_q9,
+    hex_q1, hex_q2, hex_q3, hex_q4, hex_q5, hex_q6, hex_q7,
+    bin_q1, bin_q2, bin_q3, bin_q4, bin_q5, bin_q6
+]
 used_question_list = []
 selected_questions_list = []
 selected_difficulty = 0
