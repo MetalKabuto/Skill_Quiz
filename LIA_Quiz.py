@@ -1,4 +1,4 @@
-﻿import PySimpleGUI as sg
+import PySimpleGUI as sg
 import random
 import time
 sg.set_options(font=("Arial Bold", 16))
@@ -82,11 +82,16 @@ help_layout = [
 
 program_layout = [
     #-COL1- is visible on startup, since the main menu is there.
+    #Columns have to be in a list, otherwise the program crashes on startup.
+    #Need to set each columns background_color to match the windows background. Otherwise it will use the default blue for the column.
+    #pad attempts to center the elements vertically a bit.
+    #TODO: Can set element justification and alignment here?
     [
-        sg.Column(main_menu_layout, key="-COL1-", background_color="#555555", element_justification="center", pad=(0,125)),
-        sg.Column(game_layout, visible=False, key="-COL2-", background_color="#555555"),
-        sg.Column(settings_layout, visible=False, key="-COL3-", background_color="#555555", element_justification="center", pad=(0,125)),
-        sg.Column(help_layout, visible=False, key="-COL4-", background_color="#555555", element_justification="right")
+      sg.Column(main_menu_layout, key="-COL1-", background_color="#555555", element_justification="center", pad=(0,125)),
+      sg.Column(game_layout, visible=False, key="-COL2-", background_color="#555555"),
+      sg.Column(settings_layout, visible=False, key="-COL3-", background_color="#555555", element_justification="center", pad=(0,125)),
+      #element_justification="right" makes the button stick to the right side of the screen, like in the wireframe.
+      sg.Column(help_layout, visible=False, key="-COL4-", background_color="#555555", element_justification="right")
     ]
 ]
 
