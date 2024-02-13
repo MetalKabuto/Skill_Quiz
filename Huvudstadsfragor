@@ -1,4 +1,11 @@
-europeiska_huvudstader = [
+# Det här skriptet innehåller en uppsättning frågor och tillhörande svar för en kunskapstävling om Europas huvudstäder.
+
+# Skapar en samling benämnd 'european_capitals'.
+# Varje post i denna samling är ett par (en sorts datastruktur för att lagra två relaterade data) bestående av två textsträngar:
+# den första textsträngen ställer en fråga om vilken stad som är huvudstad i ett specifikt europeiskt nation,
+# medan den andra textsträngen ger det korrekta namnet på denna huvudstad.
+
+european_capitals = [
     ("Vad är huvudstaden i Albanien?", "Tirana"),
     ("Vad är huvudstaden i Andorra?", "Andorra la Vella"),
     ("Vad är huvudstaden i Armenien?", "Jerevan"),
@@ -48,5 +55,10 @@ europeiska_huvudstader = [
     ("Vad är huvudstaden i Turkiet?", "Ankara"),
     ("Vad är huvudstaden i Ukraina?", "Kiev"),
     ("Vad är huvudstaden i Storbritannien?", "London"),
-    ("Vad är huvudstaden i Vatikanstaten?", "Vatikanstaden")
+    ("Vad är huvudstaden i Vatikanstaten?", "Vatikanstaten"),
 ]
+
+# Denna samling är tänkt att användas inom ramen för en geografisk tävling där programvaran slumpvis väljer en frågeställning från listan,
+# visar den för spelaren, och spelaren måste ange vad hen tror är den rätta huvudstaden.
+# Efteråt kan programmet jämföra spelarens angivna svar mot det andra elementet i det utvalda paret
+# för att bestämma om svaret var korrekt eller ej.
