@@ -1,2 +1,0 @@
-run this when installing:
-pyinstaller --add-data "help_image":"help_image" LIA_Quiz.py

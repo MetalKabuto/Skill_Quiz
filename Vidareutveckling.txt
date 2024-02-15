@@ -1,0 +1,20 @@
+Några förslag på grejer som kan läggas till/förbättras:
+
+En ny layout som visar sluttiden eller liknande. Just nu är det i ett konsol-fönster.
+
+Lättare sätt att lägga in nya frågor med ett GUI eller liknande istället för att behöva programmera direkt i programmet.
+
+Adminvy? Vet inte vad man skulle kunna se här, men det nämndes på ett av mötena.
+
+Tilläg 1 som jag inte gjorde, hade följande beskrivning: 
+"1. Bygg ett tävlingsledningsverktyg. En app på skrivbordet som kan visa ställningen löpande. Data skickas från tävlande enheter till tävlingsledning via api:er. Kräver en REST-API-klient på tävlingssidan och en REST-server som tävlingsledningsenheten kan accessa. Behöver bara kunna visa tid från start inklusive tilläggstid och hur många klara övningar fram till helt klar, då visas sluttid. Grafiskt interface för den med. "
+
+Frågor i en extern fil istället för att vara kodade i programmet.
+
+Göra så att man kan köra en ny rond/ändra inställingar efter att man kört färdigt. Just nu måste man starta om programmet.
+
+High-score fil med snabbaste tiderna? Lista även antal frågor för rekordet/svårighetsgrad.
+
+Gör så att hjälp-bilderna har bättre upplösning? Alternativt byt ut de mot annan text eller liknande.
+
+Gör så att timern uppdateras i realtid istället för att bara uppdatera när visa funktioner körs.
