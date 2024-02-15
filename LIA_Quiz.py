@@ -118,8 +118,8 @@ caesar_q5 = Question("Dekryptera ordet: doir \nnyckel = 4", "öken", "Ett varmt 
 
 scout_q1 = Question("Dekryptera ordet med SCOUT: \nTu Cc Cc Co Ss", "uggla", "En fågel som kommer fram på natten.", "", "", "scout", False, 5, 1)
 scout_q2 = Question("Dekryptera ordet med SCOUT: \nTt Us Co Ss", "ödla", "En sorts djur.", "", "", "scout", False, 6, 1)
-scout_q3 = Question("Dekryptera ordet med SCOUT: \nOu Pu Tt So Ts", "spöke", "'Jag tror det finns ett _ på min vind.'", "", "", "scout", False, 7, 1)
-scout_q4 = Question("Dekryptera ordet med SCOUT: \nTo Ou UU", "ost", "Görs av mjölk.", "", "", "scout", False, 8, 1)
+scout_q3 = Question("Dekryptera ordet med SCOUT: \nOu Su Tt So Ts", "spöke", "'Jag tror det finns ett _ på min vind.'", "", "", "scout", False, 7, 1)
+scout_q4 = Question("Dekryptera ordet med SCOUT: \nTo Ou Uu", "ost", "Görs av mjölk.", "", "", "scout", False, 8, 1)
 scout_q5 = Question("Dekryptera ordet med SCOUT: \nCs Uc Co", "bil", "Ett fordon med fyra hjul.", "", "", "scout", False, 9, 1)
 
 hex_q1 = Question("Vilken bokstav blir hextalet: 44 \nSvara med stor bokstav!", "D", "Bokstaven ligger mellan A och I.", "", "", "hexadecimal", False, 10, 1)
@@ -158,23 +158,23 @@ bin_q8 = Question("Vilka bokstäver blir de binära talen:\n(01 00 00 01) (01 01
 bin_q9 = Question("Vilka bokstäver blir de binära talen:\n(01 00 11 00) (01 01 01 00) \nSkriv med stora bokstäver utan mellanrum!", "LT", "Första bokstaven är L.", "", "", "binary", False, 38, 2)
 bin_q10 = Question("Vilka bokstäver blir de binära talen:\n(01 01 10 01) (01 00 10 00) \nSkriv med stora bokstäver utan mellanrum!", "YH", "Första bokstaven är Y.", "", "", "binary", False, 39, 2)
 #Hard questions
-caesar_q11 = Question("Dekryptera ordet: d_ufwd \nnyckel = 3", "arbeta", "Ordet rimmar på 'leta'", "", "", "caesar", False, 40, 3)
+caesar_q11 = Question("Dekryptera ordet: du_hwd \nnyckel = 3", "arbeta", "Ordet rimmar på 'leta'", "", "", "caesar", False, 40, 3)
 caesar_q12 = Question("Dekryptera ordet: osrwx_k \nnyckel = 4", "konstig", "Den gömda bokstaven är en vokal.", "", "", "caesar", False, 41, 3)
-caesar_q13 = Question("Dekryptera ordet: iw_pzq_ \nnyckel = 5", "drakula", "Ordet är en känd figur med vassa tänder.", "", "", "caesar", False, 42, 3)
+caesar_q13 = Question("Dekryptera ordet: iw_pzq_ \nnyckel = 5", "drakula", "En känd figur med vassa tänder.", "", "", "caesar", False, 42, 3)
 caesar_q14 = Question("Dekryptera ordet: cy_l_j \nnyckel = 3", "övning", "'X' ger färdighet.", "", "", "caesar", False, 43, 3)
 caesar_q15 = Question("Dekryptera ordet: vsw__vdh \nnyckel = 4", "rostbröd", "Någonting man äter.", "", "", "caesar", False, 44, 3)
 
 scout_q11 = Question("Dekryptera ordet med SCOUT: \nSo Ut Uo Cc __ Cu", "kängor", "Någonting man har på fötterna.", "", "", "scout", False, 45, 3)
 scout_q12 = Question("Dekryptera ordet med SCOUT: \nCc __ __ Oo Co Uc Cc Uu", "grumligt", "'Vattnet är _, det är svårt att se någonting.'.", "", "", "scout", False, 46, 3)
 scout_q13 = Question("Dekryptera ordet med SCOUT: \nCo To __ __ Uo Us Ts", "lovande", "Synonym till bra. 'Det ser _ ut.'", "", "", "scout", False, 47, 3)
-scout_q14 = Question("Dekryptera ordet med SCOUT: \n__ Ct Os __ __ Uc Uo Cc", "kyckling", "En fågelart som finns på bondgårdar.", "", "", "scout", False, 48, 3)
-scout_q15 = Question("Dekryptera ordet med SCOUT: \n__ Uo __ Ts Ou Uu", "ångest", "En jobbig känsla.", "", "", "scout", False, 49, 3)
+scout_q14 = Question("Dekryptera ordet med SCOUT: \n__ Ct Os __ Co Uc Uo Cc", "kyckling", "En fågelart som finns på bondgårdar.", "", "", "scout", False, 48, 3)
+scout_q15 = Question("Dekryptera ordet med SCOUT: \nOt Uo Cc __ Ou __", "ångest", "En jobbig känsla.", "", "", "scout", False, 49, 3)
 
 hex_q11 = Question("Översätt ordet från hextal: 54 52 59 46 46 45 4c \nSvara med stora bokstäver!", "TRYFFEL", "Ordet börjar med T.", "En sorts svamp.", "", "hexadecimal", False, 50, 3)
 hex_q12 = Question("Översätt ordet från hextal: 53 4b 52 (c3 84) 43 4b \nSvara med stora bokstäver!", "SKRÄCK", "Ordet börjar med S.", "En obehaglig känsla.", "", "hexadecimal", False, 51, 3)
 hex_q13 = Question("Översätt ordet från hextal: 52 49 47 47 41 44 \nSvara med stora bokstäver!", "RIGGAD", "Ordet börjar med R.", "'Matchen var inte rättvis, den var _.'.", "", "hexadecimal", False, 52, 3)
 hex_q14 = Question("Översätt ordet från hextal: 4b 4c 49 53 54 45 52 \nSvara med stora bokstäver!", "KLISTER", "Ordet börjar med K.", "Fäster ihop grejer.", "", "hexadecimal", False, 53, 3)
-hex_q15 = Question("Översätt ordet från hextal: 50 52 41 4b 54 49 53 4b 54 \nSvara med stora bokstäver!", "PRAKTISKT", "Ordet börjar med P.", "Någonting som är användbart.", "", "hexadecimal", False, 54, 3)
+hex_q15 = Question("Översätt ordet från hextal: 50 52 41 4b 54 49 53 4b 54 \nSvara med stora bokstäver!", "PRAKTISKT", "Ordet börjar med P.", "Någonting som är användbart är _.", "", "hexadecimal", False, 54, 3)
 
 bin_q11 = Question("Översätt ordet från binär kod: \n(01 01 00 11) (01 01 01 00) (01 00 01 01) (01 00 11 10) \nSvara med stora bokstäver!", "STEN", "Ordet börjar med S.", "Kan hittas på stranden.", "", "binary", False, 55, 3)
 bin_q12 = Question("Översätt ordet från binär kod: \n(01 01 01 00) (01 01 00 10) (11 00 00 11 10 00 01 00) (01 00 01 00) \nSvara med stora bokstäver!", "TRÄD", "Ordet börjar med T.", "'Pengar växer inte på _.'", "", "binary", False, 56, 3)
@@ -524,5 +524,7 @@ while True:
         #Updates the total_time variable in order to get the completion time for the match.
         update_Timer()
         print(f"Du vann! Din slutliga tid är: {total_time}")
+        #Added 'input' as a lazy way to let the player see their end-time when running the program as an exe. Otherwise, the window closes too fast.
+        input("Tryck på enter för att stänga av programmet.")
         break
 window.close()
